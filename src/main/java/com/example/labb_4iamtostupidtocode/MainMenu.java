@@ -10,12 +10,13 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
-public class MainMenu extends Application {
+public class MainMenu extends Application{
 
-    public Label statusLabel;
+    public static Label status;
+
 
     // Override the start() method from the Application class
-    @Override
+
     public void start(Stage primaryStage) {
 
         // Create a new BorderPane object
@@ -25,21 +26,17 @@ public class MainMenu extends Application {
         VBox statusBox = new VBox();
 
         // Create the status label
-        statusLabel = new Label("Welcome to Sudoku!");
+        status = new Label("Sudoku");
 
         // Add the status label to the VBox
-        statusBox.getChildren().add(statusLabel);
+        statusBox.getChildren().add(status);
 
         // Create a new MenuBar object
         MenuBar menuBar = new MenuBar();
 
-        // Create a new Menu object named "File"
+        // Create a new Menu object named "File", "Game" and "Help"
         Menu fileMenu = new Menu("File");
-
-        // Create a new Menu object named "Game"
         Menu gameMenu = new Menu("Game");
-
-        // Create a new Menu object named "Help"
         Menu helpMenu = new Menu("Help");
 
         // Create three MenuItems that will appear in the "File" Menu
@@ -47,8 +44,15 @@ public class MainMenu extends Application {
         MenuItem loadGameMenuItem = new MenuItem("Load Game");
         MenuItem exitGameMenuItem = new MenuItem("Exit");
 
-        // Add the two MenuItems to the "File" Menu
+        // Create MenuItems that will appear in the "Game" Menu
+        MenuItem setDifficultyMenuItem = new MenuItem("Set Difficulty");
+
+
+        // Add the three MenuItems to the "File" Menu
         fileMenu.getItems().addAll(loadGameMenuItem, saveGameMenuItem, exitGameMenuItem);
+
+        // Add the MenuItems to the "Game" Menu
+        gameMenu.getItems().addAll(setDifficultyMenuItem);
 
         // Add the "File", "Game" and "Help" Menu Menus to the MenuBar
         menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
@@ -68,14 +72,25 @@ public class MainMenu extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // Set the actions for each menu item
-        saveGameMenuItem.setOnAction(click -> {MenuAction.saveGame(statusLabel);});
-        loadGameMenuItem.setOnAction(click -> {MenuAction.loadGame(statusLabel);});
-        exitGameMenuItem.setOnAction(click -> {MenuAction.exitGame(statusLabel);});
+        // Set the actions for each File menu item click
+        saveGameMenuItem.setOnAction(click -> MenuAction.saveGame(status));
+        loadGameMenuItem.setOnAction(click -> MenuAction.loadGame(status));
+        exitGameMenuItem.setOnAction(click -> MenuAction.exitGame(status));
+
+        // Set the actions for each game menu item click
+        setDifficultyMenuItem.setOnAction(click -> MenuAction.setDifficulty(status));
     }
 
-    // The main method calls the launch() method to start the application
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
+
         launch(args);
     }
 }
