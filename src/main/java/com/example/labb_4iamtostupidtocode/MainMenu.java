@@ -88,7 +88,8 @@ public class MainMenu extends Application{
             for (int col = 0; col < SudokuUtilities.GRID_SIZE; col++) {
                 initialSudokuValues[row][col] = sudokuMatrix[row][col][0];
                 sudokuSolution[row][col] = sudokuMatrix[row][col][1];
-
+            }
+        }
 
         // Add TextFields to the GridPane for each cell of the Sudoku board
         for (int row = 0; row < SudokuUtilities.GRID_SIZE; row++) {
@@ -101,8 +102,12 @@ public class MainMenu extends Application{
                 textField.setStyle("-fx-font-size: 20px; -fx-alignment: center;");
                 gridPane.add(textField, col, row);
             }
-        }
+            root.setCenter(gridPane);
 
+            // Set the size of the GridPane to fill the center of the BorderPane
+            gridPane.setPrefSize(root.getCenter().getBoundsInLocal().getWidth(), root.getCenter().getBoundsInLocal().getHeight());
+
+        }
 
     }
 
@@ -121,4 +126,4 @@ public class MainMenu extends Application{
         launch(args);
     }
 }
-    }}
+
