@@ -1,14 +1,14 @@
 package com.example.labb_4iamtostupidtocode;
 
 import javafx.application.Application;
+
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+
 
 public class MainMenu extends Application{
 
@@ -16,14 +16,14 @@ public class MainMenu extends Application{
 
 
     // Override the start() method from the Application class
-
+    @Override
     public void start(Stage primaryStage) {
 
-        // Create a new BorderPane object
         BorderPane root = new BorderPane();
 
-        // Create a new VBox object for the status label
         VBox statusBox = new VBox();
+
+        status = new Label("Sudoku");
 
         // Create the status label
         status = new Label("Sudoku");
@@ -66,7 +66,6 @@ public class MainMenu extends Application{
         // Create a new Scene with the BorderPane and dimensions
         Scene scene = new Scene(root, 400, 400);
 
-
         primaryStage.setTitle("LETS COMMIT SEPPUKU");
         // Set the Scene of the Stage and show the Stage
         primaryStage.setScene(scene);
@@ -79,7 +78,35 @@ public class MainMenu extends Application{
 
         // Set the actions for each game menu item click
         setDifficultyMenuItem.setOnAction(click -> MenuAction.setDifficulty(status));
+
+        GridPane gridPane = new GridPane();
+
+        int[][][] sudokuMatrix = SudokuUtilities.generateSudokuMatrix(SudokuUtilities.SudokuLevel.EASY);
+        int[][] initialSudokuValues = new int[SudokuUtilities.GRID_SIZE][SudokuUtilities.GRID_SIZE];
+        int[][] sudokuSolution = new int[SudokuUtilities.GRID_SIZE][SudokuUtilities.GRID_SIZE];
+        for (int row = 0; row < SudokuUtilities.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuUtilities.GRID_SIZE; col++) {
+                initialSudokuValues[row][col] = sudokuMatrix[row][col][0];
+                sudokuSolution[row][col] = sudokuMatrix[row][col][1];
+
+
+        // Add TextFields to the GridPane for each cell of the Sudoku board
+        for (int row = 0; row < SudokuUtilities.GRID_SIZE; row++) {
+            for (int col = 0; col < SudokuUtilities.GRID_SIZE; col++) {
+                TextField textField = new TextField();
+                textField.setPrefWidth(40);
+                textField.setPrefHeight(40);
+                textField.setText(String.valueOf(initialSudokuValues[row][col]));
+                textField.setEditable(initialSudokuValues[row][col] == 0);
+                textField.setStyle("-fx-font-size: 20px; -fx-alignment: center;");
+                gridPane.add(textField, col, row);
+            }
+        }
+
+
     }
+
+
 
 
 
@@ -94,3 +121,4 @@ public class MainMenu extends Application{
         launch(args);
     }
 }
+    }}
