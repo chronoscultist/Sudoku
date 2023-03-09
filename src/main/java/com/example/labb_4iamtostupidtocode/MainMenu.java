@@ -23,8 +23,6 @@ public class MainMenu extends Application{
 
         VBox statusBox = new VBox();
 
-        status = new Label("Sudoku");
-
         // Create the status label
         status = new Label("Sudoku");
 
@@ -64,7 +62,7 @@ public class MainMenu extends Application{
         root.setBottom(statusBox);
 
         // Create a new Scene with the BorderPane and dimensions
-        Scene scene = new Scene(root, 400, 400);
+        Scene scene = new Scene(root, 500, 500);
 
         primaryStage.setTitle("LETS COMMIT SEPPUKU");
         // Set the Scene of the Stage and show the Stage
@@ -99,15 +97,25 @@ public class MainMenu extends Application{
                 textField.setPrefHeight(40);
                 textField.setText(String.valueOf(initialSudokuValues[row][col]));
                 textField.setEditable(initialSudokuValues[row][col] == 0);
-                textField.setStyle("-fx-font-size: 20px; -fx-alignment: center;");
+                textField.setStyle("-fx-font-size: 20px; -fx-alignment: center-left;");
+
+                // Add border styling to separate the 3x3 blocks
+                if (row % 3 == 0) {
+                    textField.setStyle(textField.getStyle() + "-fx-border-width: 9 0 0 0; -fx-border-color: black;");
+                }
+                if (col % 3 == 2) {
+                    textField.setStyle(textField.getStyle() + "-fx-border-width: 0 2 0 0; -fx-border-color: black;");
+                }
+
                 gridPane.add(textField, col, row);
             }
-            root.setCenter(gridPane);
-
-            // Set the size of the GridPane to fill the center of the BorderPane
-            gridPane.setPrefSize(root.getCenter().getBoundsInLocal().getWidth(), root.getCenter().getBoundsInLocal().getHeight());
-
         }
+
+        root.setCenter(gridPane);
+
+        // Set the size of the GridPane to fill the center with the BorderPane
+        gridPane.setPrefSize(root.getCenter().getBoundsInLocal().getWidth(), root.getCenter().getBoundsInLocal().getHeight());
+
 
     }
 
