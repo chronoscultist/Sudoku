@@ -8,8 +8,7 @@ import java.awt.*;
 public class PopUp {
     private JFrame frame;
 
-    public void Dif() {
-
+    public void chooseDiff() {
 
         frame = new JFrame();
         Label confirmation = new Label("What difficulty would you like?");

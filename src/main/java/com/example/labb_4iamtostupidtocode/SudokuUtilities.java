@@ -19,14 +19,14 @@ public class SudokuUtilities {
      *                                  for characters other than '0'-'9'.
      */
     public static int[][][] generateSudokuMatrix(SudokuLevel level) {
-        String representationString;
+        String levelStr;
         switch (level) {
-            case EASY: representationString = easy; break;
-            case MEDIUM: representationString = medium; break;
-            case HARD: representationString = hard; break;
-            default: representationString = medium;
+            case EASY: levelStr = easy; break;
+            case MEDIUM: levelStr = medium; break;
+            case HARD: levelStr = hard; break;
+            default: levelStr = medium;
         }
-        return convertStringToIntMatrix(representationString);
+        return convertStringToIntMatrix(levelStr);
     }
 
     /**

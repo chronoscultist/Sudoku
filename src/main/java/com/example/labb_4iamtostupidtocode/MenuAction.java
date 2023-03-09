@@ -2,15 +2,13 @@ package com.example.labb_4iamtostupidtocode;
 
 import javafx.scene.control.Label;
 
-import javax.swing.*;
-
 public class MenuAction {
 
     public static void setDifficulty(Label status) {
         System.out.println("Changing Difficulty");
         status.setText("Changing Difficulty");
         PopUp PopUp = new PopUp();
-        PopUp.Dif();
+        PopUp.chooseDiff();
     }
 
     public static void saveGame(Label status) {

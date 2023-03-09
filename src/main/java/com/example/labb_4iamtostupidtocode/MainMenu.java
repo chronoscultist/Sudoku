@@ -31,29 +31,7 @@ public class MainMenu extends Application{
 
         // Create a new MenuBar object
         MenuBar menuBar = new MenuBar();
-
-        // Create a new Menu object named "File", "Game" and "Help"
-        Menu fileMenu = new Menu("File");
-        Menu gameMenu = new Menu("Game");
-        Menu helpMenu = new Menu("Help");
-
-        // Create three MenuItems that will appear in the "File" Menu
-        MenuItem saveGameMenuItem = new MenuItem("Save Game");
-        MenuItem loadGameMenuItem = new MenuItem("Load Game");
-        MenuItem exitGameMenuItem = new MenuItem("Exit");
-
-        // Create MenuItems that will appear in the "Game" Menu
-        MenuItem setDifficultyMenuItem = new MenuItem("Set Difficulty");
-
-
-        // Add the three MenuItems to the "File" Menu
-        fileMenu.getItems().addAll(loadGameMenuItem, saveGameMenuItem, exitGameMenuItem);
-
-        // Add the MenuItems to the "Game" Menu
-        gameMenu.getItems().addAll(setDifficultyMenuItem);
-
-        // Add the "File", "Game" and "Help" Menu Menus to the MenuBar
-        menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
+        createMenuBar(menuBar);
 
         // Set the MenuBar to be displayed at the top of the BorderPane
         root.setTop(menuBar);
@@ -69,13 +47,6 @@ public class MainMenu extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // Set the actions for each File menu item click
-        saveGameMenuItem.setOnAction(click -> MenuAction.saveGame(status));
-        loadGameMenuItem.setOnAction(click -> MenuAction.loadGame(status));
-        exitGameMenuItem.setOnAction(click -> MenuAction.exitGame(status));
-
-        // Set the actions for each game menu item click
-        setDifficultyMenuItem.setOnAction(click -> MenuAction.setDifficulty(status));
 
         GridPane gridPane = new GridPane();
 
@@ -120,6 +91,57 @@ public class MainMenu extends Application{
     }
 
 
+    private void createBoard(){
+        //Move all code that creates the sudoku board here
+    }
+
+    private void createMenuBar(MenuBar menuBar){
+        // Create new Menu objects named "File", "Game" and "Help"
+        Menu fileMenu = new Menu("File");
+        Menu gameMenu = new Menu("Game");
+        Menu helpMenu = new Menu("Help");
+
+        createFileMenu(fileMenu);
+        createGameMenu(gameMenu);
+        createHelpMenu(helpMenu);
+
+        // Add the "File", "Game" and "Help" Menus to the MenuBar
+        menuBar.getMenus().addAll(fileMenu, gameMenu, helpMenu);
+    }
+
+    private void createFileMenu(Menu fileMenu){
+        // Create three MenuItems that will appear in the "File" Menu
+        MenuItem saveGameMenuItem = new MenuItem("Save Game");
+        MenuItem loadGameMenuItem = new MenuItem("Load Game");
+        MenuItem exitGameMenuItem = new MenuItem("Exit");
+
+        // Set the actions for each File menu item click
+        saveGameMenuItem.setOnAction(click -> MenuAction.saveGame(status));
+        loadGameMenuItem.setOnAction(click -> MenuAction.loadGame(status));
+        exitGameMenuItem.setOnAction(click -> MenuAction.exitGame(status));
+
+        // Add the three MenuItems to the "File" Menu
+        fileMenu.getItems().addAll(loadGameMenuItem, saveGameMenuItem, exitGameMenuItem);
+    }
+
+    private void createGameMenu(Menu gameMenu){
+        // Create MenuItems that will appear in the "Game" Menu
+        MenuItem setDifficultyMenuItem = new MenuItem("Set Difficulty");
+
+        // Add the MenuItems to the "Game" Menu
+        gameMenu.getItems().addAll(setDifficultyMenuItem);
+
+        // Set the actions for each game menu item click
+        setDifficultyMenuItem.setOnAction(click -> MenuAction.setDifficulty(status));
+    }
+    private void createHelpMenu(Menu helpMenu){
+        //Whatever you want under help menu
+    }
+
+    private void setStatus(String newStatus){
+        //Do we want this here?
+        status.setText(newStatus);
+    }
 
 
 
